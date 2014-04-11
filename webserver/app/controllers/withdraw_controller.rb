@@ -36,7 +36,7 @@ class WithdrawController < ApplicationController
       if jasao["status"] == "COMPLETED"
         user.balance -= real_value
         user.save
-        flash[:notice] = "Transfer successful. Do not forget to top up!"
+        flash[:notice] = "You transferred (€#{real_value}). Do not forget to top up!"
       else
         flash[:error] = jasao["message"]
       end
