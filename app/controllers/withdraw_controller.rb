@@ -10,7 +10,7 @@ class WithdrawController < ApplicationController
 
     redirect_to :root and return if !a
 
-    uri = URI.parse("https://#{ENV["PRODUCTION_ENDPOINT"]}/api/v2/users/#{params[:email]}/transfer")
+    uri = URI.parse("https://#{ENV["PRODUCTION_ENDPOINT"]}/api/v2/users/#{URI.escape(params[:email])}/transfer")
 
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
