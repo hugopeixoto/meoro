@@ -1,0 +1,52 @@
+#slider 
+{
+    width: 80%;
+    margin-left: 1em;
+}
+
+#min, #max {
+    width: 50px;
+    text-align: center;
+}
+
+#betButtons
+{
+	margin: 0 auto;
+	float: left;
+	width: 50%;
+}
+
+.betButton
+{
+	float:left;
+	width: 150px;
+	height: 150px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	margin: 10px;
+}
+
+#bet1
+{
+	background-image: url(../webserver/public/1.png);
+}
+
+#bet5
+{
+	background-image: url(../webserver/public/5.png);
+}
+
+#bet10
+{
+	background-image: url(../webserver/public/10.png);
+}
+
+#betX
+{
+	background-image: url(../webserver/public/X.png);
+}
+
+#textStuffs
+{
+	float: right;
+}
