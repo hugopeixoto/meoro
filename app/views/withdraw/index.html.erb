@@ -1,5 +1,9 @@
 <h1>Withdraw your money</h1>
 
+<% if flash[:error] %>
+  <p style="color: red"><%= flash[:error] %></p>
+<% end %>
+
 <%= form_tag '/cash_out', method: 'POST' do %>
   <p>
     Please provide your email<br />

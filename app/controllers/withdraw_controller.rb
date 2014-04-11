@@ -10,7 +10,7 @@ class WithdrawController < ApplicationController
 
     redirect_to :root and return if !a
 
-    uri = URI.parse("https://#{ENV["PRODUCTION_ENDPOINT"]}/api/v2/checkout")
+    uri = URI.parse("https://#{ENV["PRODUCTION_ENDPOINT"]}/api/v2/users/#{params[:email]}/transfer")
 
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -18,19 +18,8 @@ class WithdrawController < ApplicationController
 
     request = Net::HTTP::Post.new(uri.request_uri)
     request.body = {
-      "payment" => {
-        "amount" => a.balance.to_f,
-        "currency"=> "EUR",
-        "ext_customerid" => session[:auth_token],
-        "type" => "USERTRANSFER",
-        "destination" => {
-          "user" => {
-            "email" => params[:email]
-          }
-        }
-      },
-      "url_confirm" => "http://#{ENV["PRODUCTION_HOSTNAME"]}/withdraw/confirm",
-      "url_cancel"  => "http://#{ENV["PRODUCTION_HOSTNAME"]}/withdraw/cancel"
+      "amount" => a.balance.to_f,
+      "method"=> "WALLET"
     }.to_json
 
     request["Content-Type"] = "application/json"
@@ -40,34 +29,12 @@ class WithdrawController < ApplicationController
 
     jasao = JSON.parse(response.body)
 
-    redirect_to jasao["url_redirect"]
-  end
-
-  def confirm
-    uri = URI.parse("https://#{ENV['PRODUCTION_ENDPOINT']}/api/v2/checkout/#{params["checkoutid"]}")
-
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-
-    request = Net::HTTP::Get.new(uri.request_uri)
-
-    request["Content-Type"] = "application/json"
-    request["Authorization"] = "WalletPT #{ENV["PRODUCTION_API_KEY"]}"
-
-    response = http.request(request)
-
-    jasao = JSON.parse(response.body)
-
-    amount = jasao["payment"]["amount"]
-    token  = jasao["payment"]["ext_customerid"]
-
-    a = User.where(token: token).first
-    a.balance -= amount
-    a.save
-
-    redirect_to :root
-  end
-
-  def cancel
+    if jasao["status"] == 200
+      a.update_attributes(:amount => 0.0)
+      redirect_to :root, :notice => "Transfer successful. Don't forget to top up!"
+    else
+      redirect_to '/withdraw', :flash => {
+        :error => "Email non-existent, please provide your MEO wallet email address" }
+    end
   end
 end
