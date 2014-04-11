@@ -1,10 +1,21 @@
 <div id="container">
-  <div id="userContainer">
+  <div class="boxContainer" id="userContainer">
     <div id="userName"></div>
     <div id="userBalance"></div>
   </div>
-  <a href="#" id="topup" class="toggleDialog">Top up</a><br />
-  <a href="#" id="withdraw" class="toggleDialog">Cash out</a>
+  <div class="boxContainer">
+    <button href="#" id="topup" class="toggleDialog">Top up</button>
+  </div>
+  <div class="boxContainer">
+    <button href="#" id="withdraw" class="toggleDialog">Cash out</button>
+  </div>
+
+  <div class="boxContainer">
+    <form action="/api/v1/users/<%= @user.token %>" method="PUT" accept-charset="utf-8" id="nameForm">
+      <input type="text" name="user[name]" value="<%= @user.name %>" />
+      <button>Change Name</button>
+    </form>
+  </div>
   
   <div id="betContainer">
     <div id="slider">
@@ -28,12 +39,29 @@
   <div id="betHistory">
   </div>
 </div>
+
+<div id="textStuff">
+  <div id="instructions">
+    Bet on a range of numbers. Choose an amount to bet. A random number will appear. If it is inside the range, you win, if not, you lose. The smaller the range, the better the gains.
+  </div>
+  
+  <div id="cookieWarning">
+    Your session is cookie based!! This means that if you clear your cookies or close your incognito mode window you'll lose all your deposited funds!! You've been warned!
+  </div>
+  
+  <div id="error">
+  </div>
+</div>
+
 <div id="dialog_topup" class="dialog" title="Top up">
   <%= render :partial => "balance/index" %>
 </div>
+
 <div id="dialog_withdraw" class="dialog" title="Withdraw your monies">
   <%= render :partial => "withdraw/index" %>
 </div>
+
+<a href="https://github.com/hugopeixoto/meoro"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
 <script type="text/javascript" language="javascript" charset="utf-8">
 //<![CDATA[
