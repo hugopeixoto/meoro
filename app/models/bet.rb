@@ -14,9 +14,14 @@ class Bet
           bet.prize = (bet.prize*100).floor / 100.0
 
           user.balance = (user.balance + bet.prize).round(2)
-          user.save
         end
       end
+
+      user.total_spent += bet.amount
+      user.total_won += bet.prize
+      user.number_of_bets += 1
+
+      user.save
 
       { bet: bet.attributes, user: user }
     end
