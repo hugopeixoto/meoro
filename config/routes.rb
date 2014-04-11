@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get  '/topup', to: 'balance#index'
   post '/topup', to: 'balance#topup'
 
-  root 'balance#index'
+  root 'welcome#index'
 
   get '/balance/confirm', to: 'balance#confirm'
   get '/balance/cancel', to: 'balance#cancel'
