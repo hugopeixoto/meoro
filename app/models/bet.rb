@@ -18,7 +18,7 @@ class Bet < ActiveRecord::Base
         roll = Random.rand(100) + 1
 
         if (low..high).include?(roll)
-          prize = amount * (100.0/(high-low+1)) * (1 - 0.1)
+          prize = amount + (amount * ((100.0/(high-low+1))-1) * (1 - 0.2))
 
           user.balance = user.balance + prize
           user.save
