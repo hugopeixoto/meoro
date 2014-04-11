@@ -1,0 +1,10 @@
+#slider 
+{
+    width: 80%;
+    margin-left: 1em;
+}
+
+#min, #max {
+    width: 50px;
+    text-align: center;
+}
