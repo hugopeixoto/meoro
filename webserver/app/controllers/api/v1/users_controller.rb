@@ -8,12 +8,14 @@ module Api
       end
 
       def show
-        respond_with User.find(params[:id])
+        respond_with User.where(token: params[:id]).first
       end
 
-      def create
-        respond_with User.create(params[:user])
+      def update
+        @user = User.where(token: params[:id]).first
+        respond_with @user.update_attributes(params.require(:user).permit(:name))
       end
     end
   end
 end
+
