@@ -31,10 +31,9 @@ class WithdrawController < ApplicationController
 
     if jasao["status"] == "COMPLETED"
       a.update_attributes(balance: 0.0)
-      redirect_to :root, notice: "Transfer successful. Don't forget to top up!"
+      flash[:notice] = "Transfer successful. Don't forget to top up!"
     else
-      redirect_to '/withdraw', flash: {
-        error: "Email non-existent, please provide your MEO wallet email address" }
+      flash[:error] = jasao["message"]
     end
   end
 end
