@@ -76,6 +76,17 @@ $(function() {
     bet(amount);
   });
 
+  $(".dialog").dialog({autoOpen: false});
+  $(".toggleDialog").click(function(e){
+      e.preventDefault();
+      $("#dialog_"+$(this).attr("id")).dialog("open");
+  });
+  $("#dialog_withdraw").dialog({
+    close: function(e, ui) {
+      $("#errorMessage").hide();
+    }
+  });
+
   function bet(value)
   {
     $.ajax({
