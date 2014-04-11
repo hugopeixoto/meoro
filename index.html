@@ -25,7 +25,7 @@
 					       else if(maxSlide != parseInt(ui.values[1], 10)) {
 					          label = "#max";
 					       }
-			            $(label).html('€' + ui.value).position({
+			            $(label).html(ui.value).position({
 			                my: 'center top',
 			                at: 'center bottom',
 			                of: ui.handle,
@@ -44,7 +44,7 @@
 			    }
 			});
 
-			$('#min').html('€' + $('#slider').slider('values', 0)).position({
+			$('#min').html($('#slider').slider('values', 0)).position({
 			    my: 'center top',
 			    at: 'center bottom',
 			    of: $('#slider a:eq(0)'),
@@ -52,7 +52,7 @@
 			});
 			$("#min").val(minSlide);
 
-			$('#max').html('€' + $('#slider').slider('values', 1)).position({
+			$('#max').html($('#slider').slider('values', 1)).position({
 			    my: 'center top',
 			    at: 'center bottom',
 			    of: $('#slider a:eq(1)'),
