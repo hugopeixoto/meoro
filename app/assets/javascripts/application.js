@@ -96,7 +96,7 @@ $(function() {
         $('#userName').html(result.user.name);
         $('#userBalance').html(result.user.balance);
 
-        var value = result.bet.prize - result.bet.amount;
+        var value = Math.round((result.bet.prize - result.bet.amount) * 100) / 100;
         flyValue($("#userContainer"), value, {left: 100, top: 0}, {direction: "down"});
 
         var x_position = result.bet.roll * $("#slider").width() / 100;

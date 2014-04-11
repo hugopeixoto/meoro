@@ -11,22 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140411150821) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "bets", force: true do |t|
-    t.integer  "low"
-    t.integer  "high"
-    t.integer  "roll"
-    t.decimal  "amount"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "bets", ["user_id"], name: "index_bets_on_user_id", using: :btree
+ActiveRecord::Schema.define(version: 20140411214021) do
 
   create_table "users", force: true do |t|
     t.string   "token"
