@@ -4,11 +4,14 @@ class Bet < ActiveRecord::Base
     def create(user, params)
       bet = Bet.new(params)
 
-      ActiveRecord::Base.transaction do
-        amount = params[:amount]
-        low = params[:low]
-        high = params[:high]
+      amount = params[:amount]
+      low = params[:low]
+      high = params[:high]
 
+      prize = 0
+      roll = 0
+
+      ActiveRecord::Base.transaction do
         user.balance = user.balance - params[:amount]
         user.save
 
@@ -26,6 +29,8 @@ class Bet < ActiveRecord::Base
 
         bet.save
       end
+
+      {bet: bet.attributes.merge({prize: prize, roll: roll}), user: {balance: user.balance}}
     end
   end
 
