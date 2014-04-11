@@ -1,7 +1,7 @@
 require 'net/http'
 require 'uri'
 
-class BalanceController < ApplicationController
+class WithdrawController < ApplicationController
   def index
   end
 
