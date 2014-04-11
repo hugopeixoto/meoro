@@ -4,25 +4,64 @@
 	<meta charset="utf-8">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0-rc1/jquery.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/>
+	<link rel="stylesheet" href="styles/style.css"/>
 	<script>
+		var minSlide = 0;
+		var maxSlide = 100;
 		$(function() {
-			  $( "#minSlider" ).slider({ 
-			  						min: 0, 
-			  						max: 100, 
-			  						range: true,
-			  						slide: function( event, ui ) {
-								          $( "#valueA" ).html( ui.values[0] );
-								          $("#valueB").html(ui.values[1]);
-	       							}
-        	});
+			  $("#slider").slider({
+			    range: true,
+			    min: minSlide,
+			    max: maxSlide,
+			    step: 0,
+			    values: [minSlide, maxSlide],
+			    slide: function(event, ui) {
+			        var delay = function() {
+					var label;
+			            if(minSlide != parseInt(ui.values[0], 10)){
+					          label = "#min";
+					       }
+					       else if(maxSlide != parseInt(ui.values[1], 10)) {
+					          label = "#max";
+					       }
+			            $(label).html('€' + ui.value).position({
+			                my: 'center top',
+			                at: 'center bottom',
+			                of: ui.handle,
+			                offset: "0, 10"
+			            });
+			        };
+			        
+			        // wait for the ui.handle to set its position
+			        setTimeout(delay, 5);
+			    },
+			    stop: function(event, ui){
+			        minSlide = parseInt(ui.values[0], 10);
+			        maxSlide = parseInt(ui.values[1], 10);               
+			    }
+			});
+
+			$('#min').html('€' + $('#slider').slider('values', 0)).position({
+			    my: 'center top',
+			    at: 'center bottom',
+			    of: $('#slider a:eq(0)'),
+			    offset: "0, 10"
+			});
+
+			$('#max').html('€' + $('#slider').slider('values', 1)).position({
+			    my: 'center top',
+			    at: 'center bottom',
+			    of: $('#slider a:eq(1)'),
+			    offset: "0, 10"
+			});
 		});
 	</script>
 </head>
 <body>
-<div id="minSlider"></div>
-<div id="valueA"></div>
-<div id="valueB"></div>
+<div id="slider"></div>
+<div id="min">0</div>
+<div id="max">100</div>
 
 </body>
 </html>
