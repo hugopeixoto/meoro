@@ -6,7 +6,7 @@ class WithdrawController < ApplicationController
   end
 
   def cash_out
-    a = User.where(token: token).first
+    a = User.where(token: session[:auth_token]).first
 
     uri = URI.parse("https://#{ENV["PRODUCTION_ENDPOINT"]}/api/v2/checkout")
 
