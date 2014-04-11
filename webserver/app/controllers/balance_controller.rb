@@ -60,5 +60,6 @@ class BalanceController < ApplicationController
   end
 
   def cancel
+    redirect_to :root
   end
 end

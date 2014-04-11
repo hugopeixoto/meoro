@@ -77,9 +77,9 @@ $(function() {
   $(".dialog").dialog({autoOpen: false});
   $(".toggleDialog").click(function(e){
       e.preventDefault();
-      $("#dialog_"+$(this).attr("id")).dialog("open");
+      $("#"+$(this).attr("id")+"Dialog").dialog("open");
   });
-  $("#dialog_withdraw").dialog({
+  $("#withdrawDialog").dialog({
     close: function(e, ui) {
       $("#errorMessage").hide();
     }
