@@ -13,8 +13,6 @@ class BalanceController < ApplicationController
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-    puts "[LOG DEBUG] Set up http"
-
     request = Net::HTTP::Post.new(uri.request_uri)
     request.body = {
       "payment" => {
@@ -28,8 +26,6 @@ class BalanceController < ApplicationController
 
     request["Content-Type"] = "application/json"
     request["Authorization"] = "WalletPT #{ENV["PRODUCTION_API_KEY"]}"
-
-    puts "[LOG DEBUG] going to request"
 
     response = http.request(request)
 
