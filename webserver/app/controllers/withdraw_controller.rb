@@ -18,8 +18,10 @@ class WithdrawController < ApplicationController
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
     request = Net::HTTP::Post.new(uri.request_uri)
+    real_value = params[:amount].to_f >= user.balance ? user.balance : params[:amount].to_f
+
     request.body = {
-      "amount" => params[:amount].to_f,
+      "amount" => real_value,
       "method"=> "WALLET"
     }.to_json
 
@@ -32,7 +34,7 @@ class WithdrawController < ApplicationController
       jasao = JSON.parse(response.body)
 
       if jasao["status"] == "COMPLETED"
-        user.balance -= params[:amount].to_f
+        user.balance -= real_value
         user.save
         flash[:notice] = "Transfer successful. Do not forget to top up!"
       else
