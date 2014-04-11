@@ -4,10 +4,8 @@ class BalanceController < ApplicationController
   end
 
   def topup
-    conf = YAML.load_file(Rails.root.join("config", "wallet.yml"))
 
-
-    uri = URI.parse("https://#{conf["production"]["endpoint"]}/api/v2/checkout")
+    uri = URI.parse("https://#{ENV["PRODUCTION_ENDPOINT"]}/api/v2/checkout")
 
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -19,12 +17,12 @@ class BalanceController < ApplicationController
         "amount" => params[:amount].to_f,
         "currency"=> "EUR"
       },
-      "url_confirm" => "http://#{conf["production"]["hostname"]}/balance/confirm",
-      "url_cancel"  => "http://#{conf["production"]["hostname"]}/balance/cancel"
+      "url_confirm" => "http://#{ENV["PRODUCTION_HOSTNAME"]}/balance/confirm",
+      "url_cancel"  => "http://#{ENV["PRODUCTION_HOSTNAME"]}/balance/cancel"
     }.to_json
 
     request["Content-Type"] = "application/json"
-    request["Authorization"] = "WalletPT #{conf["production"]["api_key"]}"
+    request["Authorization"] = "WalletPT #{ENV["PRODUCTION_API_KEY"]}"
 
     response = http.request(request)
 
