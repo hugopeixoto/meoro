@@ -1,6 +1,6 @@
 $(function(){
   <% if flash[:notice] %>
-      $("#dialog_withdraw").dialog("close");
+      $("#withdrawDialog").dialog("close");
       window.userInfo();
       alert("<%= flash[:notice] %>");
   <% else %>
