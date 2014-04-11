@@ -20,7 +20,7 @@ class BalanceController < ApplicationController
       "payment" => {
         "amount" => params[:amount].to_f,
         "currency"=> "EUR",
-        "ext_customerid" => "mergitoff" #session[:access_token]
+        "ext_customerid" => session[:auth_token]
       },
       "url_confirm" => "http://#{ENV["PRODUCTION_HOSTNAME"]}/balance/confirm",
       "url_cancel"  => "http://#{ENV["PRODUCTION_HOSTNAME"]}/balance/cancel"
@@ -53,10 +53,14 @@ class BalanceController < ApplicationController
 
     jasao = JSON.parse(response.body)
 
-    #amount = jasao["payment"]["amount"]
-    #token  = jasao["payment"]["ext_customerid"]
+    amount = jasao["payment"]["amount"]
+    token  = jasao["payment"]["ext_customerid"]
 
-    render text: jasao
+    a = User.where(token: token).first
+    a.balance += amount
+    a.save
+
+    redirect_to :root
   end
 
   def cancel
