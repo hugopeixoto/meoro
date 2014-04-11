@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/>
 	<link rel="stylesheet" href="styles/style.css"/>
 	<script>
-		var minSlide = 0;
+		var minSlide = 1;
 		var maxSlide = 100;
 		$(function() {
 			  $("#slider").slider({
@@ -75,7 +75,8 @@
 		        		amount: value,
 		        		high: $("#max").val(),
 		        		low: $("#min").val()
-		        	}}
+		        	}
+		        },
 		        dataType: 'json',
 		        success: function (result) {
 		        	console.log(result);
