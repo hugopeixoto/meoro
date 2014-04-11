@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0-rc1/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	<script>
+		$(function() {
+			  $( "#minSlider" ).slider({ 
+			  						min: 0, 
+			  						max: 100, 
+			  						range: true,
+			  						slide: function( event, ui ) {
+								          $( "#valueA" ).html( ui.values[0] );
+								          $("#valueB").html(ui.values[1]);
+	       							}
+        	});
+		});
+	</script>
+</head>
+<body>
+<div id="minSlider"></div>
+<div id="valueA"></div>
+<div id="valueB"></div>
+
+</body>
+</html>
