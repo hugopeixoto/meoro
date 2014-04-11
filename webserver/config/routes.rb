@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get  '/topup', to: 'balance#index'
   post '/topup', to: 'balance#topup'
 
+  get '/withdraw', to: 'withdraw#index'
+  post '/cash_out', to: 'withdraw#cash_out'
+
   get '/balance/confirm', to: 'balance#confirm'
   get '/balance/cancel', to: 'balance#cancel'
 

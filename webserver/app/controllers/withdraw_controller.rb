@@ -1,11 +1,14 @@
 require 'net/http'
 require 'uri'
 
-class BalanceController < ApplicationController
+class WithdrawController < ApplicationController
   def index
   end
 
-  def topup
+  def cash_out
+    a = User.where(token: session[:auth_token]).first
+
+    redirect_to :root and return if !a
 
     uri = URI.parse("https://#{ENV["PRODUCTION_ENDPOINT"]}/api/v2/checkout")
 
@@ -16,12 +19,18 @@ class BalanceController < ApplicationController
     request = Net::HTTP::Post.new(uri.request_uri)
     request.body = {
       "payment" => {
-        "amount" => params[:amount].to_f,
+        "amount" => a.balance.to_f,
         "currency"=> "EUR",
-        "ext_customerid" => session[:auth_token]
+        "ext_customerid" => session[:auth_token],
+        "type" => "USERTRANSFER",
+        "destination" => {
+          "user" => {
+            "email" => params[:email]
+          }
+        }
       },
-      "url_confirm" => "http://#{ENV["PRODUCTION_HOSTNAME"]}/balance/confirm",
-      "url_cancel"  => "http://#{ENV["PRODUCTION_HOSTNAME"]}/balance/cancel"
+      "url_confirm" => "http://#{ENV["PRODUCTION_HOSTNAME"]}/withdraw/confirm",
+      "url_cancel"  => "http://#{ENV["PRODUCTION_HOSTNAME"]}/withdraw/cancel"
     }.to_json
 
     request["Content-Type"] = "application/json"
@@ -53,7 +62,7 @@ class BalanceController < ApplicationController
     token  = jasao["payment"]["ext_customerid"]
 
     a = User.where(token: token).first
-    a.balance += amount
+    a.balance -= amount
     a.save
 
     redirect_to :root
