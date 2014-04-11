@@ -12,7 +12,7 @@ module Api
       end
 
       def create
-        respond_with Bet.create(params[:bet])
+        respond_with Bet.create(current_user, params.require(:bet).parmit([:amount, :high, :low]))
       end
     end
   end
