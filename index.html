@@ -64,6 +64,26 @@
 		function bet(value)
 		{
 			console.log("betting " + value + " on range " + $("#min").val() + " to " + $("#max").val());
+			$.ajax({
+		        type:"POST",
+		        url: "/api/v1/bets",
+		        data: {
+		        	user:{
+		        		token: "placeholder"
+		        	}, 
+		        	bet:{
+		        		amount: value,
+		        		high: $("#max").val(),
+		        		low: $("#min").val()
+		        	}}
+		        dataType: 'json',
+		        success: function (result) {
+		        	console.log(result);
+		        },
+		        error: function (xhr, ajaxOptions, thrownError) {
+		        	console.log("woops...");
+		        }
+		    });
 		}
 	</script>
 </head>
