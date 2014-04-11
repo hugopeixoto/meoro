@@ -19,7 +19,8 @@ class BalanceController < ApplicationController
     request.body = {
       "payment" => {
         "amount" => params[:amount].to_f,
-        "currency"=> "EUR"
+        "currency"=> "EUR",
+        "ext_customerid" => session[:auth_token]
       },
       "url_confirm" => "http://#{ENV["PRODUCTION_HOSTNAME"]}/balance/confirm",
       "url_cancel"  => "http://#{ENV["PRODUCTION_HOSTNAME"]}/balance/cancel"
@@ -38,7 +39,28 @@ class BalanceController < ApplicationController
   end
 
   def confirm
-    render text: params.to_json
+    uri = URI.parse("https://#{ENV['PRODUCTION_ENDPOINT']}/api/v2/checkout/#{params["checkoutid"]}")
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Get.new(uri.request_uri)
+
+    request["Content-Type"] = "application/json"
+    request["Authorization"] = "WalletPT #{ENV["PRODUCTION_API_KEY"]}"
+
+    response = http.request(request)
+
+    jasao = JSON.parse(response.body)
+
+    amount = jasao["payment"]["amount"]
+    token  = jasao["payment"]["ext_customerid"]
+
+    a = User.where(token: token).first
+    a.balance += amount
+    a.save
+
+    redirect_to :root
   end
 
   def cancel
