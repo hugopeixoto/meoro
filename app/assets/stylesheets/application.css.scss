@@ -14,22 +14,21 @@
  *= require_self
  */
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
 #slider 
 {
     width: 80%;
-    margin-left: 1em;
+    
+    margin: 0 auto;
 }
 
 #min, #max {
     width: 50px;
     text-align: center;
-}
-
-#betButtons
-{
-	margin: 0 auto;
-	float: left;
-	width: 50%;
 }
 
 .betButton
@@ -40,6 +39,13 @@
 	background-size: contain;
 	background-repeat: no-repeat;
 	margin: 10px;
+}
+
+#betButtons
+{
+  margin: 0 auto;
+  overflow: auto;
+  width: 510px;
 }
 
 #bet1
@@ -65,4 +71,35 @@
 #textStuffs
 {
 	float: right;
+}
+
+#userContainer {
+  overflow: auto;
+  margin: 10px;
+  float: left;
+  border: 3px solid #dddddd;
+  border-radius: 10px;
+
+  #userName, #userBalance {
+    font-size: 30px;
+    line-height: 1.2em;
+    font-family: sans-serif;
+    float: left;
+    padding: 20px;
+  }
+}
+
+#betContainer
+{
+  padding: 20px;
+  background-color: #dddddd;
+  clear: both;
+  overflow: auto;
+}
+
+.floatingText {
+  position: fixed;
+  display: none;
+  z-index: 1000;
+  opacity: 0;
 }
