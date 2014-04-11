@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140411214021) do
+ActiveRecord::Schema.define(version: 20140411223236) do
 
   create_table "users", force: true do |t|
     t.string   "token"
@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(version: 20140411214021) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "total_spent",    default: 0.0
+    t.decimal  "total_won",      default: 0.0
+    t.integer  "number_of_bets", default: 0
   end
 
 end
