@@ -3,6 +3,8 @@
     <div id="userName"></div>
     <div id="userBalance"></div>
   </div>
+  <a href="#" id="topup" class="toggleDialog">Top up</a><br />
+  <a href="#" id="withdraw" class="toggleDialog">Cash out</a>
   
   <div id="betContainer">
     <div id="slider">
@@ -25,6 +27,12 @@
 
   <div id="betHistory">
   </div>
+</div>
+<div id="dialog_topup" class="dialog" title="Top up">
+  <%= render :partial => "balance/index" %>
+</div>
+<div id="dialog_withdraw" class="dialog" title="Withdraw your monies">
+  <%= render :partial => "withdraw/index" %>
 </div>
 
 <script type="text/javascript" language="javascript" charset="utf-8">

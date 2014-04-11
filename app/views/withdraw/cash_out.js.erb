@@ -1,0 +1,9 @@
+$(function(){
+  <% if flash[:notice] %>
+      alert("<%= escape_javascript(flash[:notice]) %>");
+      $("#dialog_withdraw").dialog("close");
+  <% else %>
+      $("#errorMessage").val("<%= escape_javascript(flash[:error]) %>");
+      $("#errorMessage").show();
+  <% end %>
+});

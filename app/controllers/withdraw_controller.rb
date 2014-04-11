@@ -10,7 +10,7 @@ class WithdrawController < ApplicationController
 
     redirect_to :root and return if !a
 
-    uri = URI.parse("https://#{ENV["PRODUCTION_ENDPOINT"]}/api/v2/users/#{params[:email]}/transfer")
+    uri = URI.parse("https://#{ENV["PRODUCTION_ENDPOINT"]}/api/v2/users/#{URI.escape(params[:email])}/transfer")
 
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -29,12 +29,11 @@ class WithdrawController < ApplicationController
 
     jasao = JSON.parse(response.body)
 
-    if jasao["status"] == 200
-      a.update_attributes(:amount => 0.0)
-      redirect_to :root, :notice => "Transfer successful. Don't forget to top up!"
+    if jasao["status"] == "COMPLETED"
+      a.update_attributes(balance: 0.0)
+      flash[:notice] = "Transfer successful. Don't forget to top up!"
     else
-      redirect_to '/withdraw', :flash => {
-        :error => "Email non-existent, please provide your MEO wallet email address" }
+      flash[:error] = jasao["message"]
     end
   end
 end
