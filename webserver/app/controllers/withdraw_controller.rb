@@ -6,9 +6,10 @@ class WithdrawController < ApplicationController
   end
 
   def cash_out
-    a = User.where(token: session[:auth_token]).first
+    redirect_to :root and return if !Bet::TOP_UP_AMOUNTS.include?(params[:amount].to_i)
+    user = User.where(token: session[:auth_token]).first
 
-    redirect_to :root and return if !a
+    redirect_to :root and return if !user
 
     uri = URI.parse("https://#{ENV["PRODUCTION_ENDPOINT"]}/api/v2/users/#{URI.escape(params[:email])}/transfer")
 
@@ -18,7 +19,7 @@ class WithdrawController < ApplicationController
 
     request = Net::HTTP::Post.new(uri.request_uri)
     request.body = {
-      "amount" => a.balance.to_f,
+      "amount" => params[:amount].to_f,
       "method"=> "WALLET"
     }.to_json
 
@@ -31,8 +32,9 @@ class WithdrawController < ApplicationController
       jasao = JSON.parse(response.body)
 
       if jasao["status"] == "COMPLETED"
-        a.update_attributes(balance: 0.0)
-        flash[:notice] = "Transfer successful. Don't forget to top up!"
+        user.balance -= params[:amount].to_f
+        user.save
+        flash[:notice] = "Transfer successful. Do not forget to top up!"
       else
         flash[:error] = jasao["message"]
       end
