@@ -19,8 +19,6 @@ $(function() {
   var minSlide = 1;
   var maxSlide = 100;
 
-  userInfo();
-
   $("#slider").slider({
     range: true,
     min: minSlide,
@@ -87,6 +85,19 @@ $(function() {
     }
   });
 
+  $("#nameForm").submit(function (e) {
+    e.preventDefault();
+
+    $.ajax({
+      type: "PUT",
+      url: $("#nameForm").attr("action"),
+      data: $("#nameForm").serialize(),
+      success: function(data) {
+        userInfo();
+      }
+    });
+  })
+
   function bet(value)
   {
     $.ajax({
@@ -114,6 +125,21 @@ $(function() {
         flyValue($("#slider"), result.bet.roll, {left: x_position, top: 0});
       },
       error: function (xhr, ajaxOptions, thrownError) {
+        text = "";
+
+        if(xhr.status === 402) {
+          text = "Not enough funds on your account. Deposit moar!";
+        } else if(xhr.status === 400) {
+          text = "Nice try, doofus.";
+        } else if(xhr.status === 500) {
+          text = "Something went bonkers. Sorry about that.";
+        }
+
+        $("#error").text(text);
+
+        setTimeout(function () {
+          $("#error").text("");
+        }, 5000);
       }
     });
   };
@@ -167,5 +193,8 @@ $(function() {
         $(this).remove();
       }
     );
-  }
+  };
+
+  window.userInfo = userInfo;
+  userInfo();
 });

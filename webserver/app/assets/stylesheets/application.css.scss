@@ -39,6 +39,7 @@ body {
 	background-size: contain;
 	background-repeat: no-repeat;
 	margin: 10px;
+  cursor: pointer;
 }
 
 #betButtons
@@ -73,12 +74,25 @@ body {
 	float: right;
 }
 
-#userContainer {
+.boxContainer {
   overflow: auto;
   margin: 10px;
   float: left;
   border: 3px solid #dddddd;
   border-radius: 10px;
+  height: 85px;
+
+  button {
+    font-size: 30px;
+    line-height: 1.2em;
+    margin: 0.5em;
+  }
+
+  input {
+    font-size: 30px;
+    line-height: 1.2em;
+    margin: 0.5em;
+  }
 
   #userName, #userBalance {
     font-size: 30px;
@@ -102,4 +116,22 @@ body {
   display: none;
   z-index: 1000;
   opacity: 0;
+}
+
+#textStuff {
+  font-size: 1.2em;
+  text-align: center;
+
+  > * {
+    margin-top: 2em;
+  }
+
+  #cookieWarning {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  #error {
+    color: red;
+  }
 }
