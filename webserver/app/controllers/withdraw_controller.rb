@@ -27,7 +27,7 @@ class WithdrawController < ApplicationController
 
     response = http.request(request)
 
-    if response.body
+    begin
       jasao = JSON.parse(response.body)
 
       if jasao["status"] == "COMPLETED"
@@ -36,7 +36,7 @@ class WithdrawController < ApplicationController
       else
         flash[:error] = jasao["message"]
       end
-    else
+    rescue
       flash[:error] = "Oops."
     end
   end
