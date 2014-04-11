@@ -23,8 +23,10 @@ class WithdrawController < ApplicationController
         "currency"=> "EUR",
         "ext_customerid" => session[:auth_token],
         "type" => "USERTRANSFER",
-        "client" => {
-          "email" => params[:email]
+        "destination" => {
+          "user" => {
+            "email" => params[:email]
+          }
         }
       },
       "url_confirm" => "http://#{ENV["PRODUCTION_HOSTNAME"]}/withdraw/confirm",
