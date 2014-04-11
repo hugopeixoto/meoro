@@ -73,7 +73,7 @@ body {
 	float: right;
 }
 
-#userContainer {
+#userContainer, #balanceOptions {
   overflow: auto;
   margin: 10px;
   float: left;
@@ -87,6 +87,13 @@ body {
     float: left;
     padding: 20px;
   }
+}
+#balanceOptions .toggleDialog {
+  font-size: 14px;
+  line-height: 1.2em;
+  font-family: sans-serif;
+  float: left;
+  padding: 5px;
 }
 
 #betContainer
