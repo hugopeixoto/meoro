@@ -31,6 +31,8 @@
 			                of: ui.handle,
 			                offset: "0, 10"
 			            });
+
+			            $(label).val(ui.value);
 			        };
 			        
 			        // wait for the ui.handle to set its position
@@ -48,6 +50,7 @@
 			    of: $('#slider a:eq(0)'),
 			    offset: "0, 10"
 			});
+			$("#min").val(minSlide);
 
 			$('#max').html('€' + $('#slider').slider('values', 1)).position({
 			    my: 'center top',
@@ -55,13 +58,25 @@
 			    of: $('#slider a:eq(1)'),
 			    offset: "0, 10"
 			});
+			$("#max").val(maxSlide);
 		});
+
+		function bet(value)
+		{
+			console.log("betting " + value + " on range " + $("#min").val() + " to " + $("#max").val());
+		}
 	</script>
 </head>
 <body>
 <div id="slider"></div>
-<div id="min">0</div>
-<div id="max">100</div>
+<div id="min" value="0">0</div>
+<div id="max" value="100">100</div>
+<div id="betButtons">
+	<div class="betButton" id="bet1" onClick="bet(1);"></div>
+	<div class="betButton" id="bet5" onClick="bet(5);"></div>
+	<div class="betButton" id="bet10" onClick="bet(10);"></div>
+</div>
+<div id="textStuffs">le poo</div>
 
 </body>
 </html>
