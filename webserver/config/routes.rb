@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   root 'balance#index'
 
-  post '/balance/confirm', to: 'balance#confirm'
-  post '/balance/cancel', to: 'balance#cancel'
+  get '/balance/confirm', to: 'balance#confirm'
+  get '/balance/cancel', to: 'balance#cancel'
 end
 
