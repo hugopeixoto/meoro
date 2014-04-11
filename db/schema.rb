@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140411140709) do
+ActiveRecord::Schema.define(version: 20140411150821) do
+
+  create_table "bets", force: true do |t|
+    t.integer  "low"
+    t.integer  "high"
+    t.integer  "roll"
+    t.decimal  "amount"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bets", ["user_id"], name: "index_bets_on_user_id"
 
   create_table "users", force: true do |t|
-    t.string   "hash"
+    t.string   "token"
     t.decimal  "balance"
     t.string   "name"
     t.datetime "created_at"
