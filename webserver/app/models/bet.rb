@@ -4,7 +4,7 @@ class Bet < ActiveRecord::Base
     def create(user, params)
       bet = Bet.new(params)
 
-      amount = params[:amount].to_i
+      amount = params[:amount].to_f
       low = params[:low].to_i
       high = params[:high].to_i
 
@@ -12,13 +12,13 @@ class Bet < ActiveRecord::Base
       roll = 0
 
       ActiveRecord::Base.transaction do
-        user.balance = user.balance - params[:amount].to_f
+        user.balance = user.balance - amount
         user.save
 
         roll = Random.rand(100) + 1
 
         if (low..high).include?(roll)
-          prize = amount * (100/(high-low+1)) * (1 - 0.1)
+          prize = amount * (100.0/(high-low+1)) * (1 - 0.1)
 
           user.balance = user.balance + prize
           user.save
