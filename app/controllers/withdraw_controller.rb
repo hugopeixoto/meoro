@@ -30,7 +30,7 @@ class WithdrawController < ApplicationController
     jasao = JSON.parse(response.body)
 
     if jasao["status"] == "COMPLETED"
-      a.update_attributes(amount: 0.0)
+      a.update_attributes(balance: 0.0)
       redirect_to :root, notice: "Transfer successful. Don't forget to top up!"
     else
       redirect_to '/withdraw', flash: {
