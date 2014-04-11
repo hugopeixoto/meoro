@@ -1,9 +1,17 @@
 source 'https://rubygems.org'
 
-
+ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
-gem 'pg'
+
+group :production do
+  gem 'pg'
+end
+
+group :development, :test do 
+  gem 'sqlite3'
+end
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -32,5 +40,5 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # gem 'capistrano-rails', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
-
+gem 'debugger', group: [:development, :test]
+gem 'rails_12factor', group: :production
