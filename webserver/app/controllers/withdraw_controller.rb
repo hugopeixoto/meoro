@@ -27,13 +27,17 @@ class WithdrawController < ApplicationController
 
     response = http.request(request)
 
-    jasao = JSON.parse(response.body)
+    if response.body
+      jasao = JSON.parse(response.body)
 
-    if jasao["status"] == "COMPLETED"
-      a.update_attributes(balance: 0.0)
-      flash[:notice] = "Transfer successful. Don't forget to top up!"
+      if jasao["status"] == "COMPLETED"
+        a.update_attributes(balance: 0.0)
+        flash[:notice] = "Transfer successful. Don't forget to top up!"
+      else
+        flash[:error] = jasao["message"]
+      end
     else
-      flash[:error] = jasao["message"]
+      flash[:error] = "Oops."
     end
   end
 end
