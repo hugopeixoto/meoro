@@ -8,6 +8,8 @@ class WithdrawController < ApplicationController
   def cash_out
     a = User.where(token: session[:auth_token]).first
 
+    redirect_to :root and return if !a
+
     uri = URI.parse("https://#{ENV["PRODUCTION_ENDPOINT"]}/api/v2/checkout")
 
     http = Net::HTTP.new(uri.host, uri.port)
