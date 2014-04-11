@@ -9,6 +9,8 @@ module Api
 
       def update
         @user = User.where(token: params[:id]).first
+
+        params[:user][:name] = CGI.escapeHTML(params[:user][:name])
         respond_with @user.update_attributes(params.require(:user).permit(:name))
       end
     end
