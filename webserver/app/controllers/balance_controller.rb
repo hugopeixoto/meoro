@@ -1,3 +1,5 @@
+require 'net/http'
+require 'uri'
 
 class BalanceController < ApplicationController
   def index
