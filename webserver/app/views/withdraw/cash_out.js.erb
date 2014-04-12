@@ -1,11 +1,11 @@
 $(function(){
-  <% if flash[:notice] %>
+  <% if flash[:notice].present? %>
     $("#withdrawDialog").dialog("close");
     window.userInfo();
     alert("<%= flash[:notice] %>");
     <% flash[:notice] = nil %>
   <% else %>
-      $("#errorMessage").val("<%= escape_javascript(flash[:error]) %>");
+      $("#errorMessage").text("<%= escape_javascript(flash[:error]) %>");
       $("#errorMessage").show();
     <% flash[:error] = nil %>
   <% end %>
