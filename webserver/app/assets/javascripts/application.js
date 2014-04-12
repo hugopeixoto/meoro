@@ -116,7 +116,7 @@ $(function() {
       dataType: 'json',
       success: function (result) {
         $('#userName').html(result.user.name);
-        $('#userBalance').html(result.user.balance);
+        $('#userBalance').html("€ " + result.user.balance);
 
         var value = Math.round((result.bet.prize - result.bet.amount) * 100) / 100;
         flyValue($("#userContainer"), value, {left: 100, top: 0}, {direction: "down"});
