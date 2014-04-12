@@ -21,6 +21,7 @@ You'll find the creators of this non-project here:
 * Hugo Peixoto (https://codebits.eu/hugopeixoto)
 * Joana Ferreira (https://codebits.eu/joana_mf)
 * Pedro Coelho (https://codebits.eu/punnie)
+* Rui Teixeira (VISITANTE)
 * Sara Carvalho (https://codebits.eu/sara_carvalho)
 * Simão Belchior (https://codebits.eu/simaob)
 * Tomé Duarte (https://codebits.eu/tduarte)
