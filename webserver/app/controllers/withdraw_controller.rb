@@ -40,7 +40,7 @@ class WithdrawController < ApplicationController
         flash[:error] = jasao["message"]
       end
     rescue
-      flash[:error] = "MEO Wallet returned an error... sorry!"
+      flash[:error] = "O erro não é meu, é MEO! seriously... MEO Wallet returned an error ;_; ... sorry!"
     end
   end
 end
