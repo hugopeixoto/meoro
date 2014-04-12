@@ -1,6 +1,8 @@
 <p id="errorMessage" style="display: none; color: red"><%= flash[:error] %></p>
 
 <%= form_tag '/cash_out', method: 'POST', remote: true do %>
+  <p>Select amount <br />
+    <%= select_tag :amount, options_for_select(Bet::TOP_UP_AMOUNTS) %></p>
   <p>
     Please provide your email<br />
     <%= text_field_tag :email %>

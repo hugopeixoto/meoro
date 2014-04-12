@@ -6,6 +6,7 @@ class BalanceController < ApplicationController
   end
 
   def topup
+    redirect_to :root and return if !Bet::TOP_UP_AMOUNTS.include?(params[:amount].to_i)
 
     uri = URI.parse("https://#{ENV["PRODUCTION_ENDPOINT"]}/api/v2/checkout")
 

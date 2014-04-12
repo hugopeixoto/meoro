@@ -1,4 +1,5 @@
 class Bet
+  TOP_UP_AMOUNTS = [5, 10, 25, 50, 75, 95]
   class << self
     def create(user, params)
       bet = Bet.new(params)

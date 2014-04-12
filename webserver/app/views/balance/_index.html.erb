@@ -1,6 +1,6 @@
 <p>Please select the amount you want to top up:</p>
 <%= form_tag '/topup', method: 'POST' do %>
-  <p><%= select_tag :amount, options_for_select([5, 10, 25, 50, 75, 100]) %></p>
+  <p><%= select_tag :amount, options_for_select(Bet::TOP_UP_AMOUNTS) %></p>
 
   <%= submit_tag 'Afinfa-lhe' %>
 <% end %>
