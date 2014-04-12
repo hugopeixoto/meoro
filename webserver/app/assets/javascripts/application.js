@@ -24,7 +24,7 @@ $(function() {
     min: minSlide,
     max: maxSlide,
     step: 0,
-    values: [minSlide, maxSlide],
+    values: [minSlide, 50],
     slide: function(event, ui) {
       var delay = function() {
         var label;
@@ -67,7 +67,7 @@ $(function() {
     of: $('#slider a:eq(1)'),
     offset: "0, 10"
   });
-  $("#max").val(maxSlide);
+  $("#max").val(50);
 
   $(".betButton").click(function (e) {
     amount = $(e.currentTarget).data("amount");
@@ -152,7 +152,7 @@ $(function() {
       dataType: 'json',
       success: function (result) {
         $('#userName').html(result.name);
-        $('#userBalance').html(result.balance);
+        $('#userBalance').html("€ " + result.balance);
       },
       error: function (xhr, ajaxOptions, thrownError) {
       }
