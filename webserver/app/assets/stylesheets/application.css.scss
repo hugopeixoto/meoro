@@ -123,9 +123,17 @@ body {
   #cookieWarning {
     font-weight: bold;
     text-decoration: underline;
+    position: absolute;
+    top: 0;
+    margin: 10px;
+    padding: 0 150px;
   }
 
   #error {
     color: red;
   }
+}
+
+#container {
+  padding-top: 100px;
 }
