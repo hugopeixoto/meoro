@@ -31,7 +31,7 @@ class WithdrawController < ApplicationController
     response = http.request(request)
 
     begin
-      if response.status == 200
+      if response.code == "200"
         user.balance -= real_value
         user.save
         flash[:notice] = "You transferred (€#{real_value}). Do not forget to top up!"
