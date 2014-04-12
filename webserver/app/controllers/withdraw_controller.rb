@@ -11,7 +11,7 @@ class WithdrawController < ApplicationController
 
     redirect_to :root and return if !user
 
-    uri = URI.parse("https://#{ENV["PRODUCTION_ENDPOINT"]}/api/v2/users/#{URI.escape(params[:email])}/transfer")
+    uri = URI.parse("https://#{ENV["PRODUCTION_ENDPOINT"]}/api/v2/users/#{CGI::escape(params[:email])}/transfer")
 
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
@@ -31,17 +31,16 @@ class WithdrawController < ApplicationController
     response = http.request(request)
 
     begin
-      jasao = JSON.parse(response.body)
-
-      if jasao["status"] == "COMPLETED"
+      if response.status == 200
         user.balance -= real_value
         user.save
         flash[:notice] = "You transferred (€#{real_value}). Do not forget to top up!"
       else
+        jasao = JSON.parse(response.body)
         flash[:error] = jasao["message"]
       end
     rescue
-      flash[:error] = "Oops."
+      flash[:error] = "MEO Wallet returned an error... sorry!"
     end
   end
 end

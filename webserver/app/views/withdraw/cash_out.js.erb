@@ -1,10 +1,12 @@
 $(function(){
   <% if flash[:notice] %>
-      $("#withdrawDialog").dialog("close");
-      window.userInfo();
-      alert("<%= flash[:notice] %>");
+    $("#withdrawDialog").dialog("close");
+    window.userInfo();
+    alert("<%= flash[:notice] %>");
+    <% flash[:notice] = nil %>
   <% else %>
       $("#errorMessage").val("<%= escape_javascript(flash[:error]) %>");
       $("#errorMessage").show();
+    <% flash[:error] = nil %>
   <% end %>
 });

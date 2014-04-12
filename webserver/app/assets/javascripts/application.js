@@ -49,7 +49,7 @@ $(function() {
     },
     stop: function(event, ui){
       minSlide = parseInt(ui.values[0], 10);
-      maxSlide = parseInt(ui.values[1], 10);               
+      maxSlide = parseInt(ui.values[1], 10);
     }
   });
 
