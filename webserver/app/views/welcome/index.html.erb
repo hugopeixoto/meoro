@@ -1,58 +1,60 @@
 <div id="container">
-  <div class="boxContainer" id="userContainer">
-    <div id="userName"></div>
-    <div id="userBalance"></div>
+  <div class="ink-grid">
+    <div class="column-group horizontal-gutters">
+      <div class="boxContainer all-40" id="userContainer">
+        <div id="userBalance"></div>
+        <div id="userName"></div>
+      </div>
+      <div class="boxContainer all-30">
+          <button href="#" id="topup" class="toggleDialog ink-button green all-100">Insert MEOros</button>
+      </div>
+      <div class="boxContainer all-30">
+          <button href="#" id="withdraw" class="toggleDialog ink-button all-100">Withdraw MEOros</button>
+      </div>
+    </div>
   </div>
-  <div class="boxContainer">
-    <button href="#" id="topup" class="toggleDialog">Insert MEOros</button>
-  </div>
-  <div class="boxContainer">
-    <button href="#" id="withdraw" class="toggleDialog">Withdraw MEOros</button>
-  </div>
-
-  <div class="boxContainer">
-    <form action="/api/v1/users/<%= @user.token %>" method="PUT" accept-charset="utf-8" id="nameForm">
-      <input type="text" name="user[name]" value="<%= @user.name %>" />
-      <button>Change Name</button>
-    </form>
-  </div>
-  
   <div id="betContainer">
     <div id="slider">
-    </div>
-  
-    <div id="min" value="1">
-      1
-    </div>
-  
-    <div id="max" value="50">
-      50
-    </div>
-  
-    <div id="betButtons">
-    	<div class="betButton" id="bet1" data-amount="1"></div>
-    	<div class="betButton" id="bet2" data-amount="2"></div>
-    	<div class="betButton" id="bet5" data-amount="5"></div>
-    </div>
   </div>
-
+  <div id="min" value="1">
+    1
+  </div>
+  <div id="max" value="50">
+    50
+  </div>
+  <div id="betButtons">
+    <div class="betButton" id="bet1" data-amount="1"></div>
+    <div class="betButton" id="bet2" data-amount="2"></div>
+    <div class="betButton" id="bet5" data-amount="5"></div>
+  </div>
   <div id="betHistory">
   </div>
 </div>
-
-<div id="textStuff">
-  <div id="instructions">
-    Bet on a range of numbers. Choose an amount to bet. A random number will appear. If it is inside the range, you win, if not, you lose. The smaller the range, the better the gains.
-  </div>
-  
-  <div id="cookieWarning">
-    Your session is cookie based!! This means that if you clear your cookies or close your incognito mode window you'll lose all your deposited funds!! You've been warned!
-  </div>
-  
-  <div id="error">
+  <div id="textStuff">
+    <div class="ink-grid">
+      <div id="instructions" class="all-100">
+        Bet on a range of numbers. Choose an amount to bet. A random number will appear. If it is inside the range, you win, if not, you lose. The smaller the range, the better the gains.
+      </div>
+    </div>
+    <div id="cookieWarning">
+      Your session is cookie based!! This means that if you clear your cookies or close your incognito mode window you'll lose all your deposited funds!! You've been warned!
+    </div>
+  <div class="ink-grid">
+    <form action="/api/v1/users/<%= @user.token %>" method="PUT" accept-charset="utf-8" id="nameForm" class="ink-form">
+      <div class="column-group horizontal-gutters push-center">
+        <div class="control-group all-50 small-100 tiny-100 push-center">
+            <div class="control append-button">
+                <span><input type="text" name="user[name]" value="<%= @user.name %>" /></span>
+                <button class="ink-button"> Change Name</button>
+            </div>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
-
+<div id="error">
+  </div>
+</div>
 <div id="topupDialog" class="dialog" title="Top up">
   <%= render :partial => "balance/index" %>
 </div>
