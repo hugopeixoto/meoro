@@ -19,6 +19,7 @@ You'll find the creators of this non-project here:
 * Fábio Aguiar (https://codebits.eu/fabiomiles)
 * Gonçalo Silva (https://codebits.eu/goncalossilva)
 * Hugo Peixoto (https://codebits.eu/hugopeixoto)
+* Joana Ferreira (https://codebits.eu/joana_mf)
 * Pedro Coelho (https://codebits.eu/punnie)
 * Sara Carvalho (https://codebits.eu/sara_carvalho)
 * Simão Belchior (https://codebits.eu/simaob)
